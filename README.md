@@ -1,9 +1,11 @@
 # Steam to SteamDB
+[简体中文](./README_zh.md) | English
 
-A script that adds a native-styled button on Steam store pages to jump to the SteamDB page for quick price check.
+Adds a native-styled button on Steam store pages to jump to the SteamDB page for quick price check.
 
-### Download
+### 🚀 Installation
+1. Install [Tampermonkey](https://www.tampermonkey.net/).
+2. [**Click to Install Script**](https://raw.githubusercontent.com/LWZsama/Steam-to-SteamDB/refs/heads/main/Steam-to-SteamDB.user.js).
 
-[Install Steam to SteamDB](https://raw.githubusercontent.com/LWZsama/Steam-to-SteamDB/refs/heads/main/Steam-to-SteamDB.user.js)
-
-*[Tampermonkey](https://www.tampermonkey.net/) is required to install to use this script.*
+### 📄 License
+MIT
