@@ -1,11 +1,15 @@
 // ==UserScript==
 // @name         Steam-to-SteamDB
-// @namespace    https://github.com/LWZsama/Steam-to-SteamDB
-// @version      1.0.0
+// @namespace    https://github.com/LWZsama
+// @author       Wenze(Lucas) Luo
+// @license      MIT
+// @version      1.0.1
 // @description  Adds a native-styled button on Steam store pages to jump to the SteamDB page for quick price check.
 // @match        https://store.steampowered.com/app/*
 // @run-at       document-idle
 // @grant        none
+// @downloadURL  https://raw.githubusercontent.com/LWZsama/Steam-to-SteamDB/refs/heads/main/Steam-to-SteamDB.user.js
+// @updateURL    https://raw.githubusercontent.com/LWZsama/Steam-to-SteamDB/refs/heads/main/Steam-to-SteamDB.user.js
 // ==/UserScript==
 
 (() => {
