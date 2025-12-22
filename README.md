@@ -1,7 +1,7 @@
 # Steam to SteamDB
 [简体中文](./README_zh.md) | English
 
-Adds a native-styled button on Steam store pages to jump to the SteamDB page for quick price check.
+Adds a steam-styled button on Steam games page to jump to the SteamDB page for quick price check.
 
 ### 🚀 Installation
 1. Install [Tampermonkey](https://www.tampermonkey.net/).
