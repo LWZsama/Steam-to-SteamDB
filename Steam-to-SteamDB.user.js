@@ -3,7 +3,7 @@
 // @namespace    https://github.com/LWZsama
 // @author       Wenze(Lucas) Luo
 // @license      MIT
-// @version      1.0.2
+// @version      1.0.3
 // @description  Adds a native-styled button on Steam store pages to jump to the SteamDB page for quick price check.
 // @match        https://store.steampowered.com/app/*
 // @run-at       document-idle
@@ -20,26 +20,26 @@
 
   //从 URL 中提取 AppID, 例如从 /app/730/CounterStrike_2/ 中提取 730
   function getAppId() {
-      const m = location.pathname.match(/^\/app\/(\d+)(\/|$)/);
-      return m ? m[1] : null;
+    const m = location.pathname.match(/^\/app\/(\d+)(\/|$)/);
+    return m ? m[1] : null;
   }
 
   // 生成跳转到 SteamDB 的完整 URL
   function steamDbUrl(appid) {
-      return `https://steamdb.info/app/${appid}/`;
+    return `https://steamdb.info/app/${appid}/`;
   }
 
   // 构建 HTML 结构
   function buildWrapper(appid) {
-      const wrapper = document.createElement("div");
-      wrapper.className = "game_area_purchase_game_wrapper";
-      wrapper.id = WRAP_ID;
+    const wrapper = document.createElement("div");
+    wrapper.className = "game_area_purchase_game_wrapper";
+    wrapper.id = WRAP_ID;
 
-      const regionId = `steamdb_region_${appid}`;
-      const labelId = `steamdb_label_${appid}`;
+    const regionId = `steamdb_region_${appid}`;
+    const labelId = `steamdb_label_${appid}`;
 
-      // 使用 Steam 官方的 CSS 类名，确保风格一致
-      wrapper.innerHTML = `
+    // 使用 Steam 官方的 CSS 类名，确保风格一致
+    wrapper.innerHTML = `
       <div class="game_area_purchase_game" id="${regionId}" role="region" aria-labelledby="${labelId}">
         <h2 id="${labelId}" class="title">View on SteamDB</h2>
         <div class="game_purchase_action">
@@ -58,59 +58,59 @@
         </div>
       </div>
     `;
-      return wrapper;
+    return wrapper;
   }
 
   function inject() {
-      const appid = getAppId();
-      if (!appid) return;
+    const appid = getAppId();
+    if (!appid) return;
 
-      // 定位 Steam 存放购买选项的容器
-      const purchaseRoot = document.getElementById("game_area_purchase");
-      if (!purchaseRoot) return;
+    // 定位 Steam 存放购买选项的容器
+    const purchaseRoot = document.getElementById("game_area_purchase");
+    if (!purchaseRoot) return;
 
-      // 如果页面上已经存在该按钮，则跳过，避免重复生成
-      if (document.getElementById(WRAP_ID)) return;
+    // 如果页面上已经存在该按钮，则跳过，避免重复生成
+    if (document.getElementById(WRAP_ID)) return;
 
-      // 尝试找到第一个购买选项区块，并将跳转按钮插在它前面
-      const firstWrapper = purchaseRoot.querySelector(".game_area_purchase_game_wrapper");
-      const node = buildWrapper(appid);
+    // 尝试找到第一个购买选项区块，并将跳转按钮插在它前面
+    const firstWrapper = purchaseRoot.querySelector(".game_area_purchase_game_wrapper");
+    const node = buildWrapper(appid);
 
-      if (firstWrapper) {
-          firstWrapper.insertAdjacentElement("beforebegin", node);
-      } else {
-          // 如果找不到现成的区块，直接放入购买区域的最顶部
-          purchaseRoot.prepend(node);
-      }
+    if (firstWrapper) {
+      firstWrapper.insertAdjacentElement("beforebegin", node);
+    } else {
+      // 如果找不到现成的区块，直接放入购买区域的最顶部
+      purchaseRoot.prepend(node);
+    }
   }
 
   // 确保 UI 操作在浏览器渲染帧时进行
   let scheduled = false;
   function scheduleInject() {
-      if (scheduled) return;
-      scheduled = true;
-      requestAnimationFrame(() => {
-          scheduled = false;
-          inject();
-      });
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(() => {
+      scheduled = false;
+      inject();
+    });
   }
 
   function boot() {
-      inject();
+    inject();
 
-      // 确保购买区存在
-      const purchaseRoot = document.getElementById("game_area_purchase");
-      if (!purchaseRoot) return;
+    // 确保购买区存在
+    const purchaseRoot = document.getElementById("game_area_purchase");
+    if (!purchaseRoot) return;
 
-      // 确保页面变化后，按钮依然能存在。
-      const mo = new MutationObserver(() => scheduleInject());
-      mo.observe(purchaseRoot, { childList: true, subtree: true });
+    // 确保页面变化后，按钮依然能存在。
+    const mo = new MutationObserver(() => scheduleInject());
+    mo.observe(purchaseRoot, { childList: true, subtree: true });
   }
 
   // 确保在页面加载完成后启动
   if (document.readyState === "complete" || document.readyState === "interactive") {
-      boot();
+    boot();
   } else {
-      window.addEventListener("DOMContentLoaded", boot, { once: true });
+    window.addEventListener("DOMContentLoaded", boot, { once: true });
   }
 })();
