@@ -3,7 +3,7 @@
 // @namespace    https://github.com/LWZsama
 // @author       Wenze(Lucas) Luo
 // @license      MIT
-// @version      1.0.1
+// @version      1.0.2
 // @description  Adds a native-styled button on Steam store pages to jump to the SteamDB page for quick price check.
 // @match        https://store.steampowered.com/app/*
 // @run-at       document-idle
@@ -41,7 +41,7 @@
       // 使用 Steam 官方的 CSS 类名，确保风格一致
       wrapper.innerHTML = `
       <div class="game_area_purchase_game" id="${regionId}" role="region" aria-labelledby="${labelId}">
-        <h2 id="${labelId}" class="title">跳转至 SteamDB</h2>
+        <h2 id="${labelId}" class="title">View on SteamDB</h2>
         <div class="game_purchase_action">
           <div class="game_purchase_action_bg">
             <div class="btn_addtocart">
@@ -51,7 +51,7 @@
                  href="${steamDbUrl(appid)}"
                  target="_blank"
                  rel="noopener noreferrer">
-                <span>跳转</span>
+                <span>View</span>
               </a>
             </div>
           </div>
@@ -61,7 +61,7 @@
       return wrapper;
   }
 
-  function injectOnce() {
+  function inject() {
       const appid = getAppId();
       if (!appid) return;
 
@@ -91,12 +91,12 @@
       scheduled = true;
       requestAnimationFrame(() => {
           scheduled = false;
-          injectOnce();
+          inject();
       });
   }
 
   function boot() {
-      injectOnce();
+      inject();
 
       // 确保购买区存在
       const purchaseRoot = document.getElementById("game_area_purchase");
