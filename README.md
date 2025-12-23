@@ -7,5 +7,8 @@ Adds a steam-styled button on Steam games page to jump to the SteamDB page for q
 1. Install [Tampermonkey](https://www.tampermonkey.net/).
 2. [**Click to Install Script**](https://raw.githubusercontent.com/LWZsama/Steam-to-SteamDB/refs/heads/main/Steam-to-SteamDB.user.js).
 
+### 📸 Screenshot
+![Steam to SteamDB Screenshot](./assets/screenshot.png)
+
 ### 📄 License
 MIT
